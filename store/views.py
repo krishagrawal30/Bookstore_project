@@ -7,20 +7,25 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Sample book data for demonstration
+# Sample book data
 BOOKS = [
-    {'id': 1, 'title': 'To Kill a Mockingbird', 'author': 'Harper Lee', 'publication': 'J.B. Lippincott & Co.', 'price': 10},
-    {'id': 2, 'title': '1984', 'author': 'George Orwell', 'publication': 'Secker & Warburg', 'price': 15},
-    {'id': 3, 'title': 'The Great Gatsby', 'author': 'F. Scott Fitzgerald', 'publication': 'Charles Scribner\'s Sons', 'price': 12},
-    {'id': 4, 'title': 'Pride and Prejudice', 'author': 'Jane Austen', 'publication': 'T. Egerton', 'price': 8},
-    {'id': 5, 'title': 'Moby-Dick', 'author': 'Herman Melville', 'publication': 'Harper & Brothers', 'price': 18},
+    {'id': 1, 'title': 'Wings of Fire', 'author': 'Dr. A.P.J. Abdul Kalam', 'publication': 'Universities Press', 'price': 250},
+    {'id': 2, 'title': 'Why Bharat Matters', 'author': 'Dr. S. Jaishankar', 'publication': 'Rupa Publications', 'price': 295},
+    {'id': 3, 'title': 'The Bhagavad Gita', 'author': 'Ved Vyasa', 'publication': 'Gita Press, Gorakhpur', 'price': 40},
+    {'id': 4, 'title': 'Ramcharitmanas', 'author': 'Tulsidas', 'publication': 'Gita Press, Gorakhpur', 'price': 60},
+    {'id': 5, 'title': 'Sherlock Holmes', 'author': 'Arthur Conan Doyle', 'publication': 'George Newnes Ltd.', 'price': 399},
+    {'id': 6, 'title': 'The Jungle Book', 'author': 'Rudyard Kipling', 'publication': 'Macmillan Publishers', 'price': 199},
+    {'id': 7, 'title': 'The Argumentative Indian', 'author': 'Amartya Sen', 'publication': 'Farrar, Straus and Giroux', 'price': 450},
+    {'id': 8, 'title': 'Harry Potter and the Sorcerer\'s Stone', 'author': 'J.K. Rowling', 'publication': 'Bloomsbury', 'price': 499},
+    {'id': 9, 'title': 'Savarkar: Echoes from a Forgotten Past', 'author': 'Vikram Sampath', 'publication': 'Penguin Random House India', 'price': 699}
 ]
+
 
 def book_list(request):
     cart = request.session.get('cart', {})
     if not isinstance(cart, dict):
         cart = {}
-    request.session['cart'] = cart  # Ensure cart is always a dictionary
+    request.session['cart'] = cart 
     logger.debug(f"Cart data sent to template: {cart}")
     return render(request, 'store/book_list.html', {'books': BOOKS, 'cart': cart})
 

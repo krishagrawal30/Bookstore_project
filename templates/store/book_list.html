@@ -1,133 +1,101 @@
 <html>
-
 <head>
     <title>BOOKSTORE</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f0f8ff;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #0d1117;
+            color: #dbe9f4;
         }
 
         h1 {
-            color: #ff4500;
+            background: linear-gradient(90deg, #ff512f, #dd2476);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: 3em;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
         }
 
         .book-card {
-            background: #ffffff;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            background: #161b22;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 255, 255, 0.15);
+            text-align: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
         }
 
         .book-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 255, 255, 0.2);
         }
 
         .book-details {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
 
         .add-to-cart {
-            align-self: flex-end;
-            background-color: #007bff;
+            background-color: #0077ff;
             color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
+            padding: 10px 16px;
+            border-radius: 6px;
             text-decoration: none;
             font-size: 14px;
             transition: background-color 0.3s;
+            display: inline-block;
         }
 
         .add-to-cart:hover {
-            background-color: #0056b3;
-        }
-
-        button {
-            background-color: #ff4500;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #ff6347;
-        }
-
-        input[type="number"] {
-            width: 60px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: #0056b3;
+            background-color: #0059c1;
         }
 
         .logout {
             position: absolute;
             top: 20px;
             right: 20px;
-            background-color: #ff4d4d;
+            background-color: #e63946;
             color: white;
-            padding: 10px 15px;
-            border: none;
+            padding: 10px 18px;
             border-radius: 5px;
-            text-decoration: none;
             font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.3s;
         }
 
         .logout:hover {
-            background-color: #e60000;
+            background-color: #c9182c;
         }
 
         .button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
             text-decoration: none;
-            font-size: 14px;
-            margin-top: 20px;
-            position: relative;
-            bottom: 0;
-            right: 0;
-            transition: transform 0.3s, background-color 0.3s;
-            left: 50%;
-            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            text-align: center;
+            display: block;
+            margin: 40px auto 0;
+            width: fit-content;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .button:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
-        }
-
-        .quantity {
-            display: none;
+            background-color: #218838;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -135,20 +103,22 @@
 <body>
     {% load custom_filters %}
     <a href="{% url 'logout' %}" class="logout">Logout</a>
-    <h1>Book List</h1>
-    <ul>
+    <h1>Welcome to the Bookstore</h1>
+
+    <div class="grid-container">
         {% for book in books %}
-        <li class="book-card">
+        <div class="book-card">
             <div class="book-details">
-                <strong>{{ book.title }}</strong> by {{ book.author }}<br>
+                <strong>{{ book.title }}</strong><br>
+                by {{ book.author }}<br>
                 <em>Publication: {{ book.publication }}</em><br>
-                Price: ${{ book.price }}<br>
+                Price: ₹{{ book.price }}
             </div>
             <a href="{% url 'add_to_cart' book.id %}" class="add-to-cart">Add to Cart</a>
-        </li>
+        </div>
         {% endfor %}
-    </ul>
-    <a href="{% url 'cart_list' %}" class="button">View Cart</a>
-</body>
+    </div>
 
+    <a href="{% url 'cart_list' %}" class="button"> View Cart </a>
+</body>
 </html>

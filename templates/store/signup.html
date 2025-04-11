@@ -1,85 +1,116 @@
 <html>
-
 <head>
     <title>Signup</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f0f8ff;
-            color: #333;
-        }
-
-        h1 {
-            color: #ff4500;
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #cdeaf1;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         form {
+            background: #161b22;
+            padding: 30px 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(255, 255, 255, 0.05);
+            width: 100%;
             max-width: 400px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #ff512f, #f09819);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #e0e0e0;
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 12px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 6px;
+            background-color: #0d1117;
+            color: #fff;
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.05);
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 5px #ff6347;
         }
 
         button {
-            background-color: #ff4500;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            margin-top: 20px;
             width: 100%;
+            padding: 12px;
+            background-color: #ff4500;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
         }
 
         button:hover {
             background-color: #ff6347;
         }
 
-        a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-            transition: color 0.3s;
+        .login-link {
             display: block;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #00b7ff;
+            transition: color 0.3s;
         }
 
-        a:hover {
-            color: #0056b3;
+        .login-link:hover {
+            color: #0099dd;
+        }
+
+        .error {
+            color: #ff6b6b;
+            text-align: center;
+            font-weight: bold;
+            margin-top: -10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
-    <h1>Signup</h1>
     <form method="post">
+        <h1>Signup</h1>
         {% csrf_token %}
         {% if error %}
-        <p style="color: red;">{{ error }}</p>
+            <p class="error">{{ error }}</p>
         {% endif %}
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" required>
+
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" required>
-        <button type="submit">Signup</button>
-    </form>
-    <a href="{% url 'login' %}">Already have an account? Login</a>
-</body>
 
+        <button type="submit">Signup</button>
+        <a href="{% url 'login' %}" class="login-link">Already have an account? Login</a>
+    </form>
+</body>
 </html>

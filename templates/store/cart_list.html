@@ -1,96 +1,102 @@
 <html>
-
 <head>
     <title>Cart List</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f0f8ff;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #0d1117;
+            color: #dbe9f4;
         }
 
         h1 {
-            color: #ff4500;
-            text-align: center;
             font-size: 2.5em;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            color: #ff512f;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .cart-container {
+            padding: 0 10px;
         }
 
-        li {
-            background: #ffffff;
-            margin: 10px 0;
+        .cart-card {
+            background: #161b22;
             padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        li:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        button {
-            background-color: #ff4500;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #ff6347;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+            margin-bottom: 20px;
         }
 
         input[type="number"] {
             width: 60px;
-            padding: 5px;
-            border: 1px solid #ccc;
+            padding: 6px;
+            border: 1px solid #c6c128;
             border-radius: 5px;
             text-align: center;
+            background-color: #0d1117;
+            color: #fff;
+            margin-top: 10px;
         }
 
-        a {
+        .cart-card button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cart-card button:hover {
+            background-color: #ff6347;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
             text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-            transition: color 0.3s;
+            font-size: 15px;
         }
 
-        a:hover {
-            color: #0056b3;
+        .back-link:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 
 <body>
-    <h1>Cart</h1>
-    <ul>
+    <h1>🛒 Your Cart</h1>
+
+    <div class="cart-container">
         {% for item in cart_books %}
-        <li>
-            <strong>{{ item.book.title }}</strong> by {{ item.book.author }} - ${{ item.book.price }}<br>
-            Quantity: {{ item.quantity }}
+        <div class="cart-card">
+            <p><strong>{{ item.book.title }}</strong></p>
+            <p>by {{ item.book.author }}</p>
+            <p>Price: ₹{{ item.book.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+
             <form method="post" action="{% url 'update_cart_quantity' item.book.id %}">
                 {% csrf_token %}
                 <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
                 <button type="submit">Update</button>
             </form>
+
             <form method="post" action="{% url 'delete_from_cart' item.book.id %}">
                 {% csrf_token %}
                 <button type="submit">Delete</button>
             </form>
-        </li>
+        </div>
         {% endfor %}
-    </ul>
-    <a href="{% url 'book_list' %}">Back to Book List</a>
-</body>
+    </div>
 
+    <a href="{% url 'book_list' %}" class="back-link">← Back to Book List</a>
+</body>
 </html>
