@@ -4,7 +4,6 @@ import sys
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-# Mock data for books
 BOOKS = [
     {'id': 1, 'title': 'To Kill a Mockingbird', 'author': 'Harper Lee', 'price': 10, 'publication': 'J.B. Lippincott & Co.'},
     {'id': 2, 'title': '1984', 'author': 'George Orwell', 'price': 15, 'publication': 'Secker & Warburg'},
@@ -17,7 +16,7 @@ def cart_list(request):
     cart_books = [
         {
             'book': book,
-            'quantity': cart.get(str(book['id']), 0)  # Ensure book ID is treated as a string
+            'quantity': cart.get(str(book['id']), 0)
         }
         for book in BOOKS if str(book['id']) in cart
     ]
