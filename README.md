@@ -16,13 +16,5 @@ This is a Django-based Bookstore Management Web Application that allows users to
 - **Backend:** Python, Django
 - **Database:** SQLite (default with Django)
 
-## 🎥 Demo Video
+## (A Demo Video is attached in the repository)
 
-https://github.com/krishagrawal30/bookstore_project/assets/yourusername/demo.mp4  
-
-
-```html
-<video width="100%" controls>
-  <source src="demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
